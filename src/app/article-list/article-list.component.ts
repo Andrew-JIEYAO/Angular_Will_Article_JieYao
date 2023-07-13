@@ -14,12 +14,9 @@ import { HttpClientModule } from '@angular/common/http';
   styleUrls: ['./article-list.component.css'],
 })
 export class ArticleListComponent implements OnInit {
-  // items: any;
-
   public articleService = inject(ArticleDataService);
+  public items = this.articleService.articles;
 
   ngOnInit(): void {
-    // this.items = this.articleService.articles;
-    // this.articleService.run();
   }
 }
