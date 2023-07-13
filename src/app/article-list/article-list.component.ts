@@ -4,10 +4,11 @@ import { ArticleHeaderComponent } from '../article-header/article-header.compone
 import { ArticleBodyComponent } from '../article-body/article-body.component';
 import { Article } from '../interface/article';
 import { ArticleDataService } from './article-data.service';
+import { HttpClientModule } from '@angular/common/http';
 @Component({
   selector: 'app-article-list',
   standalone: true,
-  imports: [CommonModule, ArticleHeaderComponent, ArticleBodyComponent],
+  imports: [CommonModule, ArticleHeaderComponent, ArticleBodyComponent, HttpClientModule],
   providers:[ArticleDataService],
   templateUrl: './article-list.component.html',
   styleUrls: ['./article-list.component.css'],
