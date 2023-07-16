@@ -25,6 +25,6 @@ export class ArticleListComponent implements OnInit {
   }
 
   private onGetItems() {
-    this.items = this.articleService.onGetArticles();
+    this.items = this.articleService.articles;
   }
 }
