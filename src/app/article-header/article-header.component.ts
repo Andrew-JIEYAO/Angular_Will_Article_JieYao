@@ -24,7 +24,6 @@ export class ArticleHeaderComponent implements OnInit, OnChanges {
 
   originalItem: any;
   isEdit = false;
-  newTitle = '';
 
   ngOnInit(): void {}
 

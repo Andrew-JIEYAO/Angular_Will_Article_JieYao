@@ -27,7 +27,7 @@ export class ArticleListComponent implements OnInit {
   }
 
   public onChangeTitle(article: Article): void {
-    this.articleService.onChangeTitle(article)
+    this.articleService.onChangeTitle(article).subscribe(() => this.onGetItems());
   }
 
   private onGetItems() {
