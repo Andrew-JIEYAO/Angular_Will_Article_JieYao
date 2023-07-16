@@ -21,10 +21,10 @@ export class ArticleListComponent implements OnInit {
   }
 
   public onDelete(article: any) {
-    this.articleService.onDelete(article.id).subscribe(() => this.onGetItems());
+    this.articleService.onDelete(article.id).subscribe(() => this.items = this.articleService.onGetArticles());
   }
 
-  private onGetItems() {
-    this.items = this.articleService.articles;
-  }
+  // private onGetItems() {
+  //   this.items = this.articleService.articles;
+  // }
 }
