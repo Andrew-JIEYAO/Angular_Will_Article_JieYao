@@ -22,12 +22,12 @@ export class ArticleHeaderComponent implements OnInit, OnChanges {
   @Output() delete = new EventEmitter<any>();
   @Output() changeTitle = new EventEmitter<any>();
 
-  originalItem: any;
-  isEdit = false;
+  public originalItem: any;
+  public isEdit = false;
 
   ngOnInit(): void {}
 
-  deleteArticle() {
+  doDeleteArticle() {
     this.delete.emit(this.item);
   }
   doChangeTitle() {

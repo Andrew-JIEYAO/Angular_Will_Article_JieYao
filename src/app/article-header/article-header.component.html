@@ -18,7 +18,7 @@
       <a [href]="item['category-link']">{{ item.category }}</a>
     </span>
     <span>
-      <button (click)="deleteArticle()">刪除文章</button>
+      <button (click)="doDeleteArticle()">刪除文章</button>
       <button *ngIf="!isEdit" (click)="isEdit = true">編輯標題</button>
       <button *ngIf="isEdit" (click)="doCancel()">取消編輯</button>
     </span>
