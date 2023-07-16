@@ -1,6 +1,6 @@
 <article class="post" id="post{{idx}}" *ngFor="let item of items$ | async;let idx=index">
   <app-article-header [item]="item" (delete)="onDelete($event)"
-    (changeTitle)="articleService.onChangeTitle($event)">
+    (changeTitle)="onChangeTitle($event)">
   </app-article-header>
   <app-article-body [item]="item">
   </app-article-body>

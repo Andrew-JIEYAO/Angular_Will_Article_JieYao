@@ -20,12 +20,7 @@ export class ArticleDataService {
     return this.http.delete(`${this.apiUrl}/${id}`);
   };
 
-  onChangeTitle(changedArticle: any) {
-    this.http.put<any>(`http://localhost:4200/api/articles/${changedArticle.id}`, changedArticle).subscribe(result => {
-      console.log(result);
-    },
-    (error) => {
-      console.log(error);
-    })
+  onChangeTitle(changedArticle: Article) {
+    return this.http.put(`${this.apiUrl}/${changedArticle.id}`, changedArticle);
   };
 }
