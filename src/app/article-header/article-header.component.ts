@@ -19,26 +19,19 @@ import { FormsModule } from '@angular/forms';
 })
 export class ArticleHeaderComponent implements OnInit, OnChanges {
   @Input() item: any;
-
-  originalItem: any;
-
-  ngOnInit(): void {
-    // this.newTitle = this.item.title;
-  }
-
   @Output() delete = new EventEmitter<any>();
   @Output() changeTitle = new EventEmitter<any>();
 
-  //發射(emit)回父元件
-  deleteArticle() {
-    this.delete.emit(this.item);
-  }
-
+  originalItem: any;
   isEdit = false;
   newTitle = '';
 
+  ngOnInit(): void {}
+
+  deleteArticle() {
+    this.delete.emit(this.item);
+  }
   doChangeTitle() {
-    // this.newTitle = title;
     this.changeTitle.emit(this.item);
   };
 

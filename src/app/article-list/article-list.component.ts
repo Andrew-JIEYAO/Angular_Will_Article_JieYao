@@ -19,4 +19,12 @@ export class ArticleListComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  public onDelete(article: any) {
+    this.articleService.onDelete(article.id).subscribe(() => this.onGetItems());
+  }
+
+  private onGetItems() {
+    this.items = this.articleService.onGetArticles();
+  }
 }

@@ -6,18 +6,16 @@ import { toSignal } from '@angular/core/rxjs-interop';
   providedIn: 'root'
 })
 export class ArticleDataService {
+  private apiUrl = 'http://localhost:3000/articles';
   private http: HttpClient = inject(HttpClient);
-  private getArticles = this.http.get<any>("http://localhost:4200/api/articles.json");
-  public articles = toSignal<any>(this.getArticles);
+  public articles = this.onGetArticles();
 
+  public onGetArticles() {
+    return toSignal<any>(this.http.get<any>(this.apiUrl));
+  }
 
-  onDelete(item: any) {
-    this.http.delete<any>(`http://localhost:4200/api/articles/${item.id}`).subscribe(result => {
-      console.log(result);
-    },
-    (error) => {
-      console.log(error);
-    })
+  onDelete(id: number) {
+    return this.http.delete(`${this.apiUrl}/${id}`);
   };
 
   onChangeTitle(changedArticle: any) {
