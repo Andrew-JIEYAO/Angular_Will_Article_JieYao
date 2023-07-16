@@ -1,4 +1,4 @@
-<article class="post" id="post{{idx}}" *ngFor="let item of items();let idx=index">
+<article class="post" id="post{{idx}}" *ngFor="let item of items$ | async;let idx=index">
   <app-article-header [item]="item" (delete)="onDelete($event)"
     (changeTitle)="articleService.onChangeTitle($event)">
   </app-article-header>
