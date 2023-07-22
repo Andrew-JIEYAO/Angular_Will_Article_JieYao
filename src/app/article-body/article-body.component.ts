@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./article-body.component.css'],
 })
 export class ArticleBodyComponent implements OnInit, OnChanges {
-  @Input() item: any;
+  @Input() article: any;
 
   constructor() {
     // console.log('ArticleBodyComponent: constructor');

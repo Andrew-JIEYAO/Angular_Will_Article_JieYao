@@ -1,36 +1,49 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { AsyncPipe, CommonModule } from '@angular/common';
+import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ArticleHeaderComponent } from '../article-header/article-header.component';
 import { ArticleBodyComponent } from '../article-body/article-body.component';
 import { Article } from '../interface/article';
-import { ArticleDataService } from './article-data.service';
 import { HttpClientModule } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { ArticleService } from '../article.service';
+
 @Component({
   selector: 'app-article-list',
   standalone: true,
-  imports: [CommonModule, ArticleHeaderComponent, ArticleBodyComponent, HttpClientModule, AsyncPipe],
-  providers:[ArticleDataService],
+  imports: [CommonModule, ArticleHeaderComponent, ArticleBodyComponent, HttpClientModule],
+  providers: [ArticleService],
   templateUrl: './article-list.component.html',
   styleUrls: ['./article-list.component.css'],
 })
+
 export class ArticleListComponent implements OnInit {
-  public articleService = inject(ArticleDataService);
-  public items$: Observable<Article[]> = [] as unknown as Observable<Article[]>;
+  public articleService: ArticleService = inject(ArticleService);
+  public articles: WritableSignal<Article[]> = signal([]);
 
-  ngOnInit(): void {
-    this.onGetItems();
+  async ngOnInit() {
+    this.articles.set(await this.articleService.getArticles());
   }
 
-  public onDelete(article: Article): void {
-    this.articleService.onDelete(article.id).subscribe(() => this.onGetItems());
+  async onRemoveArticle(article: Article) {
+    try {
+      await this.articleService.removeArticle(article);
+      this.articles.mutate(i => {
+        i.splice(i.findIndex(i => i.id === article.id), 1);
+      });
+    }
+    catch (error) {
+      console.log(error);
+    }
   }
 
-  public onChangeTitle(article: Article): void {
-    this.articleService.onChangeTitle(article).subscribe(() => this.onGetItems());
-  }
-
-  private onGetItems() {
-    this.items$ = this.articleService.onGetArticles();
+  async onModifyTitle(article: Article) {
+    try {
+      await this.articleService.modifyArticle(article);
+      this.articles.mutate(i => {
+        i[i.findIndex(i => i.id === article.id)].title = article.title;
+      });
+    }
+    catch(error) {
+      console.log(error);
+    }
   }
 }
